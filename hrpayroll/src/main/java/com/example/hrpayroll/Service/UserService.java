@@ -28,5 +28,9 @@ public class UserService {
         public Optional<UserModel> findOneById(String id) {
                 return userRepository.findById(id);
         }
+        public List<UserModel> delete(String id){
+                userRepository.findById(id);
+                return userRepository.findAll();
+        }
 
 }
