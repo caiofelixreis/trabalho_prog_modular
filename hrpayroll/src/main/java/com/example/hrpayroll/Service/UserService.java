@@ -2,6 +2,7 @@ package com.example.hrpayroll.Service;
 
 import com.example.hrpayroll.Model.UserModel;
 import com.example.hrpayroll.Repository.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,14 @@ public class UserService {
 
         public Optional<UserModel> findOneById(String id) {
                 return userRepository.findById(id);
+        }
+
+        public UserModel update(UserModel userModel) {
+                userRepository.save(userModel);
+        }
+        public List<UserModel> delete(String id) {
+                userRepository.deleteById(id);
+                return userRepository.findAll();
         }
 
 }
