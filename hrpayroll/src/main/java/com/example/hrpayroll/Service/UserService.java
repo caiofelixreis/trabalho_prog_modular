@@ -35,7 +35,7 @@ public class UserService {
                 UserModel user = userRepository.findById(id).get();
 
                 user.setNome(newUserData.getNome());
-                user.setEmail(newUserData.getEmail());
+
                 
         }
         public List<UserModel> delete(String id){
