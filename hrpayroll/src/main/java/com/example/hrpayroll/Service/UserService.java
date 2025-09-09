@@ -32,12 +32,10 @@ public class UserService {
                 return userRepository.findById(id);
         }
         public UserModel updateUser (String id, UserDTO newUserData) {
-                Optional<UserModel> user = userRepository.findById(id);
-                
+                UserModel user = userRepository.findById(id).get();
+
                 user.setNome(newUserData.getNome());
                 user.setEmail(newUserData.getEmail());
-                final S save = userRepository.save(newUserData);
-                return save;
                 
         }
         public List<UserModel> delete(String id){
