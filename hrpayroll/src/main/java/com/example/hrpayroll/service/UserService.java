@@ -30,4 +30,9 @@ public class UserService {
                 return userRepository.findById(id);
         }
 
+        public Double getSalarioPorHoraById(Long id) {
+//            UserModel user = userRepository.findById(id);
+
+            return null;
+        }
 }

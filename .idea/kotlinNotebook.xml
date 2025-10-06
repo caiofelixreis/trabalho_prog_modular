@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="KotlinNotebookOptionsProvider">
+    <option name="jdkName" value="openjdk-25" />
+    <option name="jvmTargetForSnippets" value="21" />
+  </component>
+</project>

@@ -24,5 +24,8 @@ public class UserModel {
     @Column(name = "salario_bruto")
     private Double salarioBruto;
 
+    @Column(name = "horas_trabalhadas_por_dia")
+    private Integer horasTrabalhadas;
+
     public UserModel() {}
 }
