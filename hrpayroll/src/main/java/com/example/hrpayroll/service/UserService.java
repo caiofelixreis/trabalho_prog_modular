@@ -26,13 +26,28 @@ public class UserService {
                 return userRepository.findAll();
         }
 
-        public Optional<UserModel> findOneById(Long id) {
-                return userRepository.findById(id);
+        public UserModel findOneById(Long id) {
+                Optional<UserModel> userOptional = userRepository.findById(id);
+
+                if (userOptional.isPresent()) {
+                    UserModel user = userOptional.get();
+                    return user;
+                }
+
+                return null;
         }
 
-        public Double getSalarioPorHoraById(Long id) {
-//            UserModel user = userRepository.findById(id);
 
+        public Double getSalarioPorHoraById(Long id) {
+            Optional<UserModel> user = userRepository.findById(id);
+
+            if (user.isPresent()) {
+                UserModel userModel = user.get();
+                Double salarioBruto = userModel.getSalarioBruto();
+                Integer horasTrabalhadas = userModel.getHorasTrabalhadasPorDia();
+                Double salarioPorHora = (salarioBruto / 30) / horasTrabalhadas;
+                return salarioPorHora;
+            }
             return null;
         }
 }
