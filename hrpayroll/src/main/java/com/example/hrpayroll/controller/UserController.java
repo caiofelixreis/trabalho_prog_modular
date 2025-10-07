@@ -32,8 +32,8 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity getUser(@Valid @PathVariable Long id) {
+    @GetMapping("/getById/{id}")
+    public ResponseEntity getUser(@PathVariable Long id) {
          UserModel user = userService.findOneById(id);
 
          HttpHeaders headers = new HttpHeaders();
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @GetMapping("/getSalarioPorHoraById/{id}")
-    public ResponseEntity getSalarioPorHoraById(@Param("id") Long id) {
+    public ResponseEntity getSalarioPorHoraById(@PathVariable Long id) {
         Double salarioDoFuncionario =  userService.getSalarioPorHoraById(id);
 
         HttpHeaders headers = new HttpHeaders();
@@ -65,4 +65,6 @@ public class UserController {
                 .headers(headers)
                 .body(salarioDoFuncionario);
     }
+
+
 }
