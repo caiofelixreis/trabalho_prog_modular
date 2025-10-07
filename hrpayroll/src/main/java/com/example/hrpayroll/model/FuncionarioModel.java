@@ -6,10 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @Data
 @AllArgsConstructor
-public class UserModel {
+public class FuncionarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,11 +23,22 @@ public class UserModel {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Senha fraca. A senha deve ter no mínimo 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um caractere especial.")
     private String senha;
 
-    @Column(name = "salario_bruto")
-    private Double salarioBruto;
+    @Column(name = "CPF")
+    private String cpf;
 
-    @Column(name = "horas_trabalhadas_por_dia")
-    private Integer horasTrabalhadasPorDia;
+    @Column(name = "RG")
+    private String rg;
 
-    public UserModel() {}
+    @Column(name = "data_de_nascimento")
+    private Date dataNascimento;
+
+    @Column(name = "PIS")
+    private Double pis;
+
+    @Column(name = "data_de_admissao")
+    private Date dataDeAdmissao;
+
+    private String cargo;
+
+    public FuncionarioModel() {}
 }

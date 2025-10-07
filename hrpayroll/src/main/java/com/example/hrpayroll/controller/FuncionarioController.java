@@ -1,40 +1,36 @@
 package com.example.hrpayroll.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.coyote.Request;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-import com.example.hrpayroll.model.UserModel;
-import com.example.hrpayroll.service.UserService;
+import com.example.hrpayroll.model.FuncionarioModel;
+import com.example.hrpayroll.service.FuncionarioService;
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class FuncionarioController {
     @Autowired
-    private final UserService userService;
+    private final FuncionarioService funcionarioService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public FuncionarioController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity createUser(@Valid @RequestBody UserModel userModel) {
-        userService.create(userModel);
+    public ResponseEntity createUser(@Valid @RequestBody FuncionarioModel funcionarioModel) {
+        funcionarioService.create(funcionarioModel);
 
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/getById/{id}")
     public ResponseEntity getUser(@PathVariable Long id) {
-         UserModel user = userService.findOneById(id);
+         FuncionarioModel user = funcionarioService.findOneById(id);
 
          HttpHeaders headers = new HttpHeaders();
          headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
@@ -45,7 +41,7 @@ public class UserController {
 
     @GetMapping("/list")
     public ResponseEntity listUsers() {
-         List<UserModel> users = userService.list();
+         List<FuncionarioModel> users = funcionarioService.list();
 
          HttpHeaders headers = new HttpHeaders();
          headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
@@ -56,7 +52,7 @@ public class UserController {
 
     @GetMapping("/getSalarioPorHoraById/{id}")
     public ResponseEntity getSalarioPorHoraById(@PathVariable Long id) {
-        Double salarioDoFuncionario =  userService.getSalarioPorHoraById(id);
+        Double salarioDoFuncionario =  funcionarioService.getSalarioPorHoraById(id);
 
         HttpHeaders headers = new HttpHeaders();
 
