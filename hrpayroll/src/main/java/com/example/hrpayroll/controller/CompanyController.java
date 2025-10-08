@@ -3,12 +3,8 @@ package com.example.hrpayroll.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
@@ -17,6 +13,7 @@ import com.example.hrpayroll.model.CompanyModel;
 import com.example.hrpayroll.service.CompanyService;
 
 @RestController
+@RequestMapping("/companies")
 public class CompanyController {
     @Autowired
     private final CompanyService companyService;
@@ -25,22 +22,27 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-    @PostMapping("/companies/create")
-    public CompanyModel createCompany(@Valid @RequestBody CompanyModel companyModel) {
-        return companyService.create(companyModel);
+    @PostMapping("/create")
+    public ResponseEntity createCompany(@Valid @RequestBody CompanyModel companyModel) {
+        companyService.create(companyModel);
+
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/companies/{id}")
-    public Optional<CompanyModel> getCompany(@Valid @PathVariable Long id) {
-        return companyService.findOneById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity getCompany(@Valid @PathVariable Long id) {
+
+        CompanyModel company = companyService.findOneById(id);
+
+        return ResponseEntity.ok().body(company);
     }
 
-    @GetMapping("/companies")
+    @GetMapping("/list")
     public Iterable<CompanyModel> listCompanies() {
         return companyService.list();
     }
 
-    @PatchMapping("/companies/{id}")
+    @PatchMapping("/update/{id}")
     public CompanyModel patchCompany(@PathVariable Long id, @Valid @RequestBody CompanyPatchDTO companyPatchDto) {
         return companyService.update(id, companyPatchDto);
     }
